@@ -1,0 +1,43 @@
+---
+description: PHP and Laravel coding conventions for this package
+globs: src/**/*.php
+alwaysApply: false
+---
+
+# PHP Conventions
+
+## General
+
+- PHP 8.1+ — use constructor property promotion, named arguments, enums where appropriate.
+- No comments that just narrate the code. Only explain non-obvious intent or trade-offs.
+- All public methods on `Dropday.php` must have a corresponding `@method` docblock on `Facades/Dropday.php`.
+
+## HTTP client
+
+Always use the `client()` helper — never call `Http::` directly outside of it:
+
+```php
+// ✅ GOOD
+$response = $this->client()->post('/orders', $data);
+
+// ❌ BAD
+$response = Http::withHeaders([...])->post(...);
+```
+
+## Error handling
+
+```php
+// 422 → DropdayException
+if ($response->status() === 422) {
+    throw new DropdayException('Dropday validation error: ' . $response->body(), 422);
+}
+
+// Everything else → let Laravel's built-in throw() handle it
+$response->throw();
+```
+
+## Service provider
+
+- `mergeConfigFrom` in `register()` — defaults always available.
+- `publishes()` in `boot()` — user can override via `vendor:publish`.
+- Tag config publishes as `dropday-config`.

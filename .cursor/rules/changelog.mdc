@@ -1,0 +1,28 @@
+---
+description: CHANGELOG.md format and conventions for this project
+globs: CHANGELOG.md
+alwaysApply: false
+---
+
+# Changelog conventions
+
+Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## Entry format
+
+```markdown
+## [x.y.z] - YYYY-MM-DD
+
+### Added
+- `ClassName::method(signature)` — plain-English description.
+
+### Changed
+### Fixed
+### Removed
+```
+
+- Use only the sections that are relevant; omit empty ones.
+- One bullet per change; lead with a backtick-quoted symbol when referring to code.
+- Keep bullets short — what changed and why, not how.
+- New versions go at the top, above older entries.
+- Never edit or backdate a released version entry.

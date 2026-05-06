@@ -1,0 +1,35 @@
+---
+description: Package context, naming, architecture and conventions for the Dropday Laravel package
+alwaysApply: true
+---
+
+# Dropday Laravel Package
+
+## What this is
+
+`dropday-io/laravel` is the **official Laravel integration package** for the [Dropday](https://dropday.io) API; an order automation / dropshipping automation service. It is published under the GitHub org `dropday-io`.
+
+## Namespace
+
+```
+Dropday\Dropday\
+```
+
+## Package structure
+
+```
+src/
+  Dropday.php                  # Main HTTP client
+  DropdayServiceProvider.php   # Registers singleton + publishes config
+  Facades/Dropday.php          # Facade with @method docblocks
+  Exceptions/DropdayException.php
+config/dropday.php
+```
+
+## API conventions
+
+- Every request requires `api-key` and `account-id` headers.
+- Base URL: `https://dropday.io/api/v1` (overridable via `DROPDAY_BASE_URL`).
+- HTTP 422 → throw `DropdayException`. All other errors → `$response->throw()`.
+- Duplicate orders: Dropday returns HTTP 200 with `"Order already exists"` — not an error. Callers must check the `message` key if they care about duplicates.
+- Pass `"test" => true` in order payloads during development to skip real supplier routing.

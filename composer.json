@@ -1,0 +1,50 @@
+{
+    "name": "dropday-io/laravel",
+    "description": "Laravel integration for Dropday dropshipping fulfillment.",
+    "keywords": ["laravel", "dropshipping", "fulfillment", "ecommerce", "api", "dropday"],
+    "homepage": "https://github.com/dropday-io/laravel",
+    "support": {
+        "issues": "https://github.com/dropday-io/laravel/issues",
+        "source": "https://github.com/dropday-io/laravel",
+        "docs": "https://docs.dropday.io"
+    },
+    "type": "library",
+    "license": "MIT",
+    "require": {
+        "php": "^8.1",
+        "illuminate/support": "^10|^11|^12",
+        "illuminate/http": "^10|^11|^12"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^8|^9|^10",
+        "pestphp/pest": "^2|^3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Dropday\\Dropday\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Dropday\\Dropday\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Dropday\\Dropday\\DropdayServiceProvider"
+            ],
+            "aliases": {
+                "Dropday": "Dropday\\Dropday\\Facades\\Dropday"
+            }
+        }
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
